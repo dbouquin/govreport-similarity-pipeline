@@ -1,0 +1,18 @@
+# Core ML and data processing dependencies
+torch
+transformers
+datasets # had to `conda install pyarrow -c conda-forge` first
+model2vec
+scikit-learn
+numpy
+pandas
+
+# CLI and utilities
+click
+tqdm
+rich
+
+# Optional: for visualization stretch goals
+matplotlib
+seaborn
+scipy

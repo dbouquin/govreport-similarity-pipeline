@@ -46,17 +46,16 @@ python main.py distill --model BAAI/bge-m3 --pca-dims 256
 ```
 
 2. **Test on a sample**
+Replace with the path to your model
 ```bash
-python main.py analyze --model models/BAAI_bge-m3_distilled --num-samples 100
+python main.py analyze --model /models/BAAI_bge-m3_distilled --num-samples 100
 ```
 **Example output:**
 ```bash
-dbouquin$ python main.py analyze --model models/BAAI_bge-m3_distilled --num-samples 100
-
 Analyzing Semantic Similarity
-Model: models/BAAI_bge-m3_distilled
+Model: /Users/dbouquin/Documents/govreport-similarity-pipeline/models/BAAI_bge-m3_distilled
 Dataset: ccdv/govreport-summarization (test)
-Output: /Users/dbouquin/Documents/govreport_similarity/results/analysis_BAAI_bge-m3_distilled_20250720_011210
+Output: /Users/dbouquin/Documents/govreport-similarity-pipeline/results/analysis_BAAI_bge-m3_distilled_20250723_154541
 Max samples: 100
 Batch size: 32
 
@@ -116,26 +115,21 @@ Analysis Summary:
   • Top 2 tranches contain: 70.0% of samples
 
 ✓ Analysis completed successfully!
-Results saved to: /Users/dbouquin/Documents/govreport_similarity/results/analysis_BAAI_bge-m3_distilled_20250720_011210
+Results saved to: /Users/dbouquin/Documents/govreport-similarity-pipeline/results/analysis_BAAI_bge-m3_distilled_20250723_154541
 Samples processed: 100
 Samples failed: 0
 Mean similarity: 0.890
-
-Use: python main.py report --input /Users/dbouquin/Documents/govreport_similarity/results/analysis_BAAI_bge-m3_distilled_20250720_011210.csv to 
-generate detailed statistics
 ```
 
-3. **Generate a report**
+1. **Generate a report**
 ```bash
 python main.py report --input /results/analysis_*.csv
 ```
 **Example output:**
 ```bash
-dbouquin$ python main.py report --input /Users/dbouquin/Documents/govreport_similarity/results/analysis_BAAI_bge-m3_distilled_20250720_011210.csv
-
 Generating Statistical Report
-Input: /Users/dbouquin/Documents/govreport_similarity/results/analysis_BAAI_bge-m3_distilled_20250720_011210.csv
-Output: /Users/dbouquin/Documents/govreport_similarity/results/report_BAAI_bge-m3_distilled_20250720_011210
+Input: /Users/dbouquin/Documents/govreport-similarity-pipeline/results/analysis_BAAI_bge-m3_distilled_20250723_154950.csv
+Output: /Users/dbouquin/Documents/govreport-similarity-pipeline/results/report_BAAI_bge-m3_distilled_20250723_154950
 Format: both
 
 Validating input file...
@@ -156,15 +150,18 @@ Report Summary
 │ Maximum            │ 0.9503 │
 │ Range              │ 0.1969 │
 └────────────────────┴────────┘
-                 Threshold Analysis                  
-┏━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━┳━━━━━━━━━━━━┓
-┃ Similarity Level ┃ Threshold ┃ Count ┃ Percentage ┃
-┡━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━╇━━━━━━━╇━━━━━━━━━━━━┩
-│ Very High        │   ≥ 0.9   │    46 │      46.0% │
-│ High             │   ≥ 0.8   │    98 │      98.0% │
-│ Medium           │   ≥ 0.6   │   100 │     100.0% │
-│ Low              │   ≥ 0.4   │   100 │     100.0% │
-└──────────────────┴───────────┴───────┴────────────┘
+             Similarity Distribution              
+┏━━━━━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━┳━━━━━━━━━━━━┓
+┃ Quality Level ┃ Range     ┃ Count ┃ Percentage ┃
+┡━━━━━━━━━━━━━━━╇━━━━━━━━━━━╇━━━━━━━╇━━━━━━━━━━━━┩
+│ Very High     │ 0.9 - 1.0 │    46 │      46.0% │
+│ High          │ 0.8 - 0.9 │    52 │      52.0% │
+│ Medium        │ 0.6 - 0.8 │     2 │       2.0% │
+│ Low           │ 0.4 - 0.6 │     0 │       0.0% │
+│ Very Low      │ 0.0 - 0.4 │     0 │       0.0% │
+└───────────────┴───────────┴───────┴────────────┘
+
+Processing: 100 samples processed, 0 failed
             Distance Tranches Summary            
 ┏━━━━━━━━━┳━━━━━━━━━━━━━━━━┳━━━━━━━┳━━━━━━━━━━━━┓
 ┃ Tranche ┃ Distance Range ┃ Count ┃ Percentage ┃
@@ -180,11 +177,13 @@ Most populated tranche: #1
 Total samples: 100
 
 ✓ Report generation completed successfully!
-Report files saved to: /Users/dbouquin/Documents/govreport_similarity/results/report_BAAI_bge-m3_distilled_20250720_011210
+Report files saved to: /Users/dbouquin/Documents/govreport-similarity-pipeline/results/report_BAAI_bge-m3_distilled_20250723_154950
 
 Generated Files:
-  ✓ Statistical report (JSON): /Users/dbouquin/Documents/govreport_similarity/results/report_BAAI_bge-m3_distilled_20250720_011210.json (0.01 MB)
-  ✓ Summary statistics (CSV): /Users/dbouquin/Documents/govreport_similarity/results/report_BAAI_bge-m3_distilled_20250720_011210_summary.csv (0.00 MB)
+  ✓ Statistical report (JSON): /Users/dbouquin/Documents/govreport-similarity-pipeline/results/report_BAAI_bge-m3_distilled_20250723_154950.json 
+(0.01 MB)
+  ✓ Summary statistics (CSV): 
+/Users/dbouquin/Documents/govreport-similarity-pipeline/results/report_BAAI_bge-m3_distilled_20250723_154950_summary.csv (0.00 MB)
 ```
 
 ## More to Try
@@ -199,12 +198,6 @@ python main.py analyze \
 ```
 **Example Output**
 ```bash
-dbouquin$ python main.py analyze \
->   --model models/BAAI_bge-m3_distilled \
->   --output results/test_custom \
->   --num-samples 25 \
->   --batch-size 16
-
 Analyzing Semantic Similarity
 Model: models/BAAI_bge-m3_distilled
 Dataset: ccdv/govreport-summarization (test)
@@ -272,8 +265,6 @@ Results saved to: results/test_custom
 Samples processed: 25
 Samples failed: 0
 Mean similarity: 0.892
-
-Use: python main.py report --input results/test_custom.csv to generate detailed statistics
 ```
 
 ## CLI Interface

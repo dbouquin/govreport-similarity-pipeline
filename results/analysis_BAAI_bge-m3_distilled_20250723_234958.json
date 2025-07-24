@@ -1,0 +1,805 @@
+{
+  "analysis_metadata": {
+    "model_path": "/Users/dbouquin/Documents/govreport-similarity-pipeline/models/BAAI_bge-m3_distilled",
+    "dataset_name": "ccdv/govreport-summarization",
+    "analysis_timestamp": "2025-07-23T23:50:06.426517",
+    "num_samples_requested": 100,
+    "similarity_metric": "cosine",
+    "processing_mode": "single_worker"
+  },
+  "similarity_scores": [
+    0.9503476023674011,
+    0.8494939208030701,
+    0.9366579055786133,
+    0.9317487478256226,
+    0.7534667253494263,
+    0.8712045550346375,
+    0.943988561630249,
+    0.9465129375457764,
+    0.8415245413780212,
+    0.8666013479232788,
+    0.935286283493042,
+    0.821628212928772,
+    0.8232402801513672,
+    0.8972747325897217,
+    0.8302513360977173,
+    0.8813913464546204,
+    0.9410461783409119,
+    0.9307347536087036,
+    0.8829994201660156,
+    0.9175559282302856,
+    0.9193832278251648,
+    0.9186699390411377,
+    0.8641980886459351,
+    0.9062159061431885,
+    0.9378911256790161,
+    0.845929741859436,
+    0.8641730546951294,
+    0.8841296434402466,
+    0.9009268879890442,
+    0.9184359312057495,
+    0.8697503805160522,
+    0.8353907465934753,
+    0.8928807973861694,
+    0.9057645201683044,
+    0.927754282951355,
+    0.8727489113807678,
+    0.9286870956420898,
+    0.9205948710441589,
+    0.9424092769622803,
+    0.8793907165527344,
+    0.9123829007148743,
+    0.921230137348175,
+    0.9495978355407715,
+    0.9223761558532715,
+    0.9044480323791504,
+    0.9214314222335815,
+    0.880485475063324,
+    0.902397096157074,
+    0.8758507370948792,
+    0.9140409827232361,
+    0.8670808672904968,
+    0.8976424932479858,
+    0.8839595317840576,
+    0.9323912858963013,
+    0.8334898352622986,
+    0.9092819094657898,
+    0.8312489986419678,
+    0.8372120261192322,
+    0.8123971223831177,
+    0.9241114854812622,
+    0.9000161290168762,
+    0.8951902985572815,
+    0.9173207879066467,
+    0.8352837562561035,
+    0.8893157839775085,
+    0.8892648220062256,
+    0.9160693287849426,
+    0.8857823014259338,
+    0.8369839787483215,
+    0.901885986328125,
+    0.8636285662651062,
+    0.9289751648902893,
+    0.9244537949562073,
+    0.8490074276924133,
+    0.8627188801765442,
+    0.8972158432006836,
+    0.8896827697753906,
+    0.7948648929595947,
+    0.8855768442153931,
+    0.8254126310348511,
+    0.8210585117340088,
+    0.858765721321106,
+    0.8951817154884338,
+    0.8951679468154907,
+    0.8775507807731628,
+    0.893869161605835,
+    0.9216681718826294,
+    0.881409227848053,
+    0.9241271615028381,
+    0.9421144723892212,
+    0.9375017881393433,
+    0.9327988028526306,
+    0.9232445359230042,
+    0.8940187692642212,
+    0.8188273906707764,
+    0.9345597624778748,
+    0.9072977900505066,
+    0.862953245639801,
+    0.8632646799087524,
+    0.919301450252533
+  ],
+  "sample_metadata": [
+    {
+      "sample_id": 972118,
+      "report_length": 15281,
+      "summary_length": 3737,
+      "processing_time": 0.0012785506248474121
+    },
+    {
+      "sample_id": 899072,
+      "report_length": 34791,
+      "summary_length": 4779,
+      "processing_time": 0.0012785506248474121
+    },
+    {
+      "sample_id": 62990,
+      "report_length": 49978,
+      "summary_length": 3203,
+      "processing_time": 0.0012785506248474121
+    },
+    {
+      "sample_id": 970757,
+      "report_length": 11878,
+      "summary_length": 4062,
+      "processing_time": 0.0012785506248474121
+    },
+    {
+      "sample_id": 120431,
+      "report_length": 47331,
+      "summary_length": 4060,
+      "processing_time": 0.0012785506248474121
+    },
+    {
+      "sample_id": 531670,
+      "report_length": 41047,
+      "summary_length": 3571,
+      "processing_time": 0.0012785506248474121
+    },
+    {
+      "sample_id": 102245,
+      "report_length": 22961,
+      "summary_length": 3334,
+      "processing_time": 0.0012785506248474121
+    },
+    {
+      "sample_id": 887317,
+      "report_length": 18559,
+      "summary_length": 3712,
+      "processing_time": 0.0012785506248474121
+    },
+    {
+      "sample_id": 683171,
+      "report_length": 45955,
+      "summary_length": 4401,
+      "processing_time": 0.0012785506248474121
+    },
+    {
+      "sample_id": 330363,
+      "report_length": 47361,
+      "summary_length": 4035,
+      "processing_time": 0.0012785506248474121
+    },
+    {
+      "sample_id": 124057,
+      "report_length": 25541,
+      "summary_length": 3088,
+      "processing_time": 0.0012785506248474121
+    },
+    {
+      "sample_id": 958908,
+      "report_length": 44935,
+      "summary_length": 4747,
+      "processing_time": 0.0012785506248474121
+    },
+    {
+      "sample_id": 687907,
+      "report_length": 30646,
+      "summary_length": 4546,
+      "processing_time": 0.0012785506248474121
+    },
+    {
+      "sample_id": 887466,
+      "report_length": 35786,
+      "summary_length": 4040,
+      "processing_time": 0.0012785506248474121
+    },
+    {
+      "sample_id": 59621,
+      "report_length": 34997,
+      "summary_length": 3669,
+      "processing_time": 0.0012785506248474121
+    },
+    {
+      "sample_id": 970154,
+      "report_length": 33667,
+      "summary_length": 3686,
+      "processing_time": 0.0012785506248474121
+    },
+    {
+      "sample_id": 769128,
+      "report_length": 14620,
+      "summary_length": 1906,
+      "processing_time": 0.0012785506248474121
+    },
+    {
+      "sample_id": 772333,
+      "report_length": 24350,
+      "summary_length": 3358,
+      "processing_time": 0.0012785506248474121
+    },
+    {
+      "sample_id": 616700,
+      "report_length": 33734,
+      "summary_length": 3752,
+      "processing_time": 0.0012785506248474121
+    },
+    {
+      "sample_id": 436804,
+      "report_length": 24881,
+      "summary_length": 3788,
+      "processing_time": 0.0012785506248474121
+    },
+    {
+      "sample_id": 911730,
+      "report_length": 49872,
+      "summary_length": 4218,
+      "processing_time": 0.0012785506248474121
+    },
+    {
+      "sample_id": 721863,
+      "report_length": 39954,
+      "summary_length": 3499,
+      "processing_time": 0.0012785506248474121
+    },
+    {
+      "sample_id": 454645,
+      "report_length": 20716,
+      "summary_length": 3364,
+      "processing_time": 0.0012785506248474121
+    },
+    {
+      "sample_id": 306198,
+      "report_length": 41702,
+      "summary_length": 3448,
+      "processing_time": 0.0012785506248474121
+    },
+    {
+      "sample_id": 812918,
+      "report_length": 14770,
+      "summary_length": 3697,
+      "processing_time": 0.0012785506248474121
+    },
+    {
+      "sample_id": 87870,
+      "report_length": 32313,
+      "summary_length": 3862,
+      "processing_time": 0.0012785506248474121
+    },
+    {
+      "sample_id": 723890,
+      "report_length": 21073,
+      "summary_length": 3558,
+      "processing_time": 0.0012785506248474121
+    },
+    {
+      "sample_id": 480101,
+      "report_length": 39117,
+      "summary_length": 3492,
+      "processing_time": 0.0012785506248474121
+    },
+    {
+      "sample_id": 196285,
+      "report_length": 21504,
+      "summary_length": 3325,
+      "processing_time": 0.0012785506248474121
+    },
+    {
+      "sample_id": 962095,
+      "report_length": 29383,
+      "summary_length": 3691,
+      "processing_time": 0.0012785506248474121
+    },
+    {
+      "sample_id": 973828,
+      "report_length": 28259,
+      "summary_length": 3952,
+      "processing_time": 0.0012785506248474121
+    },
+    {
+      "sample_id": 167346,
+      "report_length": 40027,
+      "summary_length": 3138,
+      "processing_time": 0.0012785506248474121
+    },
+    {
+      "sample_id": 110450,
+      "report_length": 38411,
+      "summary_length": 3599,
+      "processing_time": 0.0012785506248474121
+    },
+    {
+      "sample_id": 654105,
+      "report_length": 18154,
+      "summary_length": 4335,
+      "processing_time": 0.0012785506248474121
+    },
+    {
+      "sample_id": 471788,
+      "report_length": 30319,
+      "summary_length": 3133,
+      "processing_time": 0.0012785506248474121
+    },
+    {
+      "sample_id": 471805,
+      "report_length": 34490,
+      "summary_length": 3822,
+      "processing_time": 0.0012785506248474121
+    },
+    {
+      "sample_id": 991788,
+      "report_length": 41701,
+      "summary_length": 3983,
+      "processing_time": 0.0012785506248474121
+    },
+    {
+      "sample_id": 198237,
+      "report_length": 33894,
+      "summary_length": 4550,
+      "processing_time": 0.0012785506248474121
+    },
+    {
+      "sample_id": 899531,
+      "report_length": 25690,
+      "summary_length": 3870,
+      "processing_time": 0.0012785506248474121
+    },
+    {
+      "sample_id": 283034,
+      "report_length": 25390,
+      "summary_length": 4789,
+      "processing_time": 0.0012785506248474121
+    },
+    {
+      "sample_id": 368028,
+      "report_length": 14030,
+      "summary_length": 4310,
+      "processing_time": 0.0012785506248474121
+    },
+    {
+      "sample_id": 465090,
+      "report_length": 11902,
+      "summary_length": 3567,
+      "processing_time": 0.0012785506248474121
+    },
+    {
+      "sample_id": 217915,
+      "report_length": 29316,
+      "summary_length": 3913,
+      "processing_time": 0.0012785506248474121
+    },
+    {
+      "sample_id": 804340,
+      "report_length": 38811,
+      "summary_length": 3903,
+      "processing_time": 0.0012785506248474121
+    },
+    {
+      "sample_id": 93923,
+      "report_length": 29598,
+      "summary_length": 3166,
+      "processing_time": 0.0012785506248474121
+    },
+    {
+      "sample_id": 414271,
+      "report_length": 32833,
+      "summary_length": 3591,
+      "processing_time": 0.0012785506248474121
+    },
+    {
+      "sample_id": 101477,
+      "report_length": 35539,
+      "summary_length": 3653,
+      "processing_time": 0.0012785506248474121
+    },
+    {
+      "sample_id": 549828,
+      "report_length": 13976,
+      "summary_length": 3490,
+      "processing_time": 0.0012785506248474121
+    },
+    {
+      "sample_id": 417188,
+      "report_length": 49283,
+      "summary_length": 3207,
+      "processing_time": 0.0012785506248474121
+    },
+    {
+      "sample_id": 452590,
+      "report_length": 27723,
+      "summary_length": 4321,
+      "processing_time": 0.0012785506248474121
+    },
+    {
+      "sample_id": 202030,
+      "report_length": 22346,
+      "summary_length": 4125,
+      "processing_time": 0.0012785506248474121
+    },
+    {
+      "sample_id": 83494,
+      "report_length": 39948,
+      "summary_length": 2957,
+      "processing_time": 0.0012785506248474121
+    },
+    {
+      "sample_id": 952545,
+      "report_length": 29797,
+      "summary_length": 3807,
+      "processing_time": 0.0012785506248474121
+    },
+    {
+      "sample_id": 833510,
+      "report_length": 49335,
+      "summary_length": 3393,
+      "processing_time": 0.0012785506248474121
+    },
+    {
+      "sample_id": 592489,
+      "report_length": 44647,
+      "summary_length": 2944,
+      "processing_time": 0.0012785506248474121
+    },
+    {
+      "sample_id": 868372,
+      "report_length": 44212,
+      "summary_length": 3919,
+      "processing_time": 0.0012785506248474121
+    },
+    {
+      "sample_id": 940976,
+      "report_length": 49858,
+      "summary_length": 4148,
+      "processing_time": 0.0012785506248474121
+    },
+    {
+      "sample_id": 902472,
+      "report_length": 37289,
+      "summary_length": 3105,
+      "processing_time": 0.0012785506248474121
+    },
+    {
+      "sample_id": 233238,
+      "report_length": 31269,
+      "summary_length": 3642,
+      "processing_time": 0.0012785506248474121
+    },
+    {
+      "sample_id": 266807,
+      "report_length": 30025,
+      "summary_length": 3316,
+      "processing_time": 0.0012785506248474121
+    },
+    {
+      "sample_id": 593441,
+      "report_length": 40910,
+      "summary_length": 3643,
+      "processing_time": 0.0012785506248474121
+    },
+    {
+      "sample_id": 725995,
+      "report_length": 33732,
+      "summary_length": 3487,
+      "processing_time": 0.0012785506248474121
+    },
+    {
+      "sample_id": 489139,
+      "report_length": 15855,
+      "summary_length": 4178,
+      "processing_time": 0.0012785506248474121
+    },
+    {
+      "sample_id": 344576,
+      "report_length": 46471,
+      "summary_length": 3105,
+      "processing_time": 0.0012785506248474121
+    },
+    {
+      "sample_id": 343555,
+      "report_length": 17570,
+      "summary_length": 3525,
+      "processing_time": 0.0012785506248474121
+    },
+    {
+      "sample_id": 707965,
+      "report_length": 13195,
+      "summary_length": 2787,
+      "processing_time": 0.0012785506248474121
+    },
+    {
+      "sample_id": 301723,
+      "report_length": 16293,
+      "summary_length": 3215,
+      "processing_time": 0.0012785506248474121
+    },
+    {
+      "sample_id": 851978,
+      "report_length": 23485,
+      "summary_length": 4844,
+      "processing_time": 0.0012785506248474121
+    },
+    {
+      "sample_id": 679661,
+      "report_length": 27582,
+      "summary_length": 3591,
+      "processing_time": 0.0012785506248474121
+    },
+    {
+      "sample_id": 150895,
+      "report_length": 18106,
+      "summary_length": 4375,
+      "processing_time": 0.0012785506248474121
+    },
+    {
+      "sample_id": 729120,
+      "report_length": 40287,
+      "summary_length": 3827,
+      "processing_time": 0.0012785506248474121
+    },
+    {
+      "sample_id": 953309,
+      "report_length": 30546,
+      "summary_length": 3320,
+      "processing_time": 0.0012785506248474121
+    },
+    {
+      "sample_id": 19946,
+      "report_length": 36556,
+      "summary_length": 4821,
+      "processing_time": 0.0012785506248474121
+    },
+    {
+      "sample_id": 944454,
+      "report_length": 38579,
+      "summary_length": 3747,
+      "processing_time": 0.0012785506248474121
+    },
+    {
+      "sample_id": 173464,
+      "report_length": 25812,
+      "summary_length": 3180,
+      "processing_time": 0.0012785506248474121
+    },
+    {
+      "sample_id": 432163,
+      "report_length": 26441,
+      "summary_length": 4457,
+      "processing_time": 0.0012785506248474121
+    },
+    {
+      "sample_id": 748055,
+      "report_length": 38164,
+      "summary_length": 3688,
+      "processing_time": 0.0012785506248474121
+    },
+    {
+      "sample_id": 807524,
+      "report_length": 40822,
+      "summary_length": 3764,
+      "processing_time": 0.0012785506248474121
+    },
+    {
+      "sample_id": 562020,
+      "report_length": 47955,
+      "summary_length": 3729,
+      "processing_time": 0.0012785506248474121
+    },
+    {
+      "sample_id": 126917,
+      "report_length": 39640,
+      "summary_length": 3377,
+      "processing_time": 0.0012785506248474121
+    },
+    {
+      "sample_id": 729142,
+      "report_length": 37321,
+      "summary_length": 3683,
+      "processing_time": 0.0012785506248474121
+    },
+    {
+      "sample_id": 152044,
+      "report_length": 19493,
+      "summary_length": 2111,
+      "processing_time": 0.0012785506248474121
+    },
+    {
+      "sample_id": 379270,
+      "report_length": 30858,
+      "summary_length": 3640,
+      "processing_time": 0.0012785506248474121
+    },
+    {
+      "sample_id": 927431,
+      "report_length": 15819,
+      "summary_length": 3544,
+      "processing_time": 0.0012785506248474121
+    },
+    {
+      "sample_id": 923672,
+      "report_length": 43346,
+      "summary_length": 4104,
+      "processing_time": 0.0012785506248474121
+    },
+    {
+      "sample_id": 342895,
+      "report_length": 27683,
+      "summary_length": 3433,
+      "processing_time": 0.0012785506248474121
+    },
+    {
+      "sample_id": 370930,
+      "report_length": 7993,
+      "summary_length": 1604,
+      "processing_time": 0.0012785506248474121
+    },
+    {
+      "sample_id": 469065,
+      "report_length": 28637,
+      "summary_length": 3848,
+      "processing_time": 0.0012785506248474121
+    },
+    {
+      "sample_id": 368588,
+      "report_length": 12191,
+      "summary_length": 3191,
+      "processing_time": 0.0012785506248474121
+    },
+    {
+      "sample_id": 586710,
+      "report_length": 37965,
+      "summary_length": 4011,
+      "processing_time": 0.0012785506248474121
+    },
+    {
+      "sample_id": 815345,
+      "report_length": 27202,
+      "summary_length": 4502,
+      "processing_time": 0.0012785506248474121
+    },
+    {
+      "sample_id": 134940,
+      "report_length": 24085,
+      "summary_length": 3918,
+      "processing_time": 0.0012785506248474121
+    },
+    {
+      "sample_id": 326701,
+      "report_length": 24197,
+      "summary_length": 4331,
+      "processing_time": 0.0012785506248474121
+    },
+    {
+      "sample_id": 905421,
+      "report_length": 43232,
+      "summary_length": 4561,
+      "processing_time": 0.0012785506248474121
+    },
+    {
+      "sample_id": 796123,
+      "report_length": 23590,
+      "summary_length": 3759,
+      "processing_time": 0.0012785506248474121
+    },
+    {
+      "sample_id": 14777,
+      "report_length": 36062,
+      "summary_length": 4756,
+      "processing_time": 0.0012785506248474121
+    },
+    {
+      "sample_id": 834447,
+      "report_length": 34369,
+      "summary_length": 4428,
+      "processing_time": 0.0012785506248474121
+    },
+    {
+      "sample_id": 139633,
+      "report_length": 45722,
+      "summary_length": 3549,
+      "processing_time": 0.0012785506248474121
+    },
+    {
+      "sample_id": 440026,
+      "report_length": 41723,
+      "summary_length": 3396,
+      "processing_time": 0.0012785506248474121
+    },
+    {
+      "sample_id": 696157,
+      "report_length": 34977,
+      "summary_length": 3796,
+      "processing_time": 0.0012785506248474121
+    }
+  ],
+  "processing_stats": {
+    "samples_processed": 100,
+    "samples_failed": 0,
+    "average_processing_time": 0.1281909942626953
+  },
+  "distance_tranches": {
+    "num_tranches": 5,
+    "total_samples": 100,
+    "distance_range": {
+      "min_distance": 0.04965239763259888,
+      "max_distance": 0.24653327465057373,
+      "range_width": 0.19688087701797485
+    },
+    "tranches": [
+      {
+        "tranche_id": 1,
+        "distance_range": {
+          "lower_bound": 0.04965239763259888,
+          "upper_bound": 0.08902857303619385
+        },
+        "similarity_range": {
+          "lower_bound": 0.9109714269638062,
+          "upper_bound": 0.9503476023674011
+        },
+        "count": 37,
+        "percentage": 37.0,
+        "description": "Very High Similarity (Excellent summaries)"
+      },
+      {
+        "tranche_id": 2,
+        "distance_range": {
+          "lower_bound": 0.08902857303619385,
+          "upper_bound": 0.12840474843978883
+        },
+        "similarity_range": {
+          "lower_bound": 0.8715952515602112,
+          "upper_bound": 0.9109714269638062
+        },
+        "count": 33,
+        "percentage": 33.0,
+        "description": "High Similarity (Good summaries)"
+      },
+      {
+        "tranche_id": 3,
+        "distance_range": {
+          "lower_bound": 0.12840474843978883,
+          "upper_bound": 0.16778092384338378
+        },
+        "similarity_range": {
+          "lower_bound": 0.8322190761566162,
+          "upper_bound": 0.8715952515602112
+        },
+        "count": 20,
+        "percentage": 20.0,
+        "description": "Medium Similarity (Acceptable summaries)"
+      },
+      {
+        "tranche_id": 4,
+        "distance_range": {
+          "lower_bound": 0.16778092384338378,
+          "upper_bound": 0.20715709924697875
+        },
+        "similarity_range": {
+          "lower_bound": 0.7928429007530212,
+          "upper_bound": 0.8322190761566162
+        },
+        "count": 9,
+        "percentage": 9.0,
+        "description": "Low Similarity (Poor summaries)"
+      },
+      {
+        "tranche_id": 5,
+        "distance_range": {
+          "lower_bound": 0.20715709924697875,
+          "upper_bound": 0.24653327465057373
+        },
+        "similarity_range": {
+          "lower_bound": 0.7534667253494263,
+          "upper_bound": 0.7928429007530212
+        },
+        "count": 1,
+        "percentage": 1.0,
+        "description": "Very Low Similarity (Very poor summaries)"
+      }
+    ],
+    "summary": {
+      "most_populated_tranche": 1,
+      "least_populated_tranche": 5,
+      "concentration_metric": 1.85
+    }
+  }
+}

@@ -1,0 +1,297 @@
+{
+  "report_metadata": {
+    "input_path": "/Users/dbouquin/Documents/govreport-similarity-pipeline/results/analysis_BAAI_bge-m3_distilled_20250723_234958.csv",
+    "report_timestamp": "2025-07-23T23:52:36.828534",
+    "analysis_metadata": {
+      "model_path": "/Users/dbouquin/Documents/govreport-similarity-pipeline/models/BAAI_bge-m3_distilled",
+      "dataset_name": "ccdv/govreport-summarization",
+      "analysis_timestamp": "2025-07-23T23:50:06.426517",
+      "num_samples_requested": 100,
+      "similarity_metric": "cosine",
+      "processing_mode": "single_worker"
+    },
+    "generator": "Government Report Similarity Pipeline"
+  },
+  "statistical_analysis": {
+    "descriptive_statistics": {
+      "count": 100,
+      "mean": 0.890146678686142,
+      "median": 0.8951860070228577,
+      "standard_deviation": 0.03954881447897131,
+      "variance": 0.0015641087266920909,
+      "minimum": 0.7534667253494263,
+      "maximum": 0.9503476023674011,
+      "range": 0.19688087701797485,
+      "skewness": -0.741804686331145,
+      "kurtosis": 0.22139716521745134
+    },
+    "percentiles": {
+      "5th": 0.8215997278690338,
+      "10th": 0.8332657516002655,
+      "25th": 0.8641918301582336,
+      "50th": 0.8951860070228577,
+      "75th": 0.9214906096458435,
+      "90th": 0.9354234457015992,
+      "95th": 0.9421292126178742
+    },
+    "confidence_intervals": {
+      "95_percent_lower": 0.8822598024126641,
+      "95_percent_upper": 0.8980335549596198,
+      "99_percent_lower": 0.8797072280656788,
+      "99_percent_upper": 0.9005861293066051
+    },
+    "length_analysis": {
+      "report_length_correlation": -0.37059321266093004,
+      "summary_length_correlation": -0.04258871535435778,
+      "average_report_length": 31412.41,
+      "average_summary_length": 3721.01,
+      "length_ratio_statistics": {
+        "mean_ratio": 0.13570538361317352,
+        "median_ratio": 0.11721643530447662
+      }
+    }
+  },
+  "quality_metrics": {
+    "threshold_analysis": {
+      "very_high_similarity": {
+        "threshold": 0.9,
+        "count": 46,
+        "percentage": 46.0
+      },
+      "high_similarity": {
+        "threshold": 0.8,
+        "count": 98,
+        "percentage": 98.0
+      },
+      "medium_similarity": {
+        "threshold": 0.6,
+        "count": 100,
+        "percentage": 100.0
+      },
+      "low_similarity": {
+        "threshold": 0.4,
+        "count": 100,
+        "percentage": 100.0
+      }
+    },
+    "processing_stats": {
+      "samples_processed": 100,
+      "samples_failed": 0,
+      "average_processing_time": 0.1281909942626953
+    },
+    "sample_distribution": {
+      "very_high": {
+        "range": "0.9 - 1.0",
+        "count": 46,
+        "percentage": 46.0
+      },
+      "high": {
+        "range": "0.8 - 0.9",
+        "count": 52,
+        "percentage": 52.0
+      },
+      "medium": {
+        "range": "0.6 - 0.8",
+        "count": 2,
+        "percentage": 2.0
+      },
+      "low": {
+        "range": "0.4 - 0.6",
+        "count": 0,
+        "percentage": 0.0
+      },
+      "very_low": {
+        "range": "0.0 - 0.4",
+        "count": 0,
+        "percentage": 0.0
+      }
+    }
+  },
+  "distribution_analysis": {
+    "histogram": {
+      "bin_edges": [
+        0.0,
+        0.05,
+        0.1,
+        0.15000000000000002,
+        0.2,
+        0.25,
+        0.30000000000000004,
+        0.35000000000000003,
+        0.4,
+        0.45,
+        0.5,
+        0.55,
+        0.6000000000000001,
+        0.65,
+        0.7000000000000001,
+        0.75,
+        0.8,
+        0.8500000000000001,
+        0.9,
+        0.9500000000000001,
+        1.0
+      ],
+      "bin_centers": [
+        0.025,
+        0.07500000000000001,
+        0.125,
+        0.17500000000000002,
+        0.225,
+        0.275,
+        0.32500000000000007,
+        0.375,
+        0.42500000000000004,
+        0.475,
+        0.525,
+        0.5750000000000001,
+        0.625,
+        0.675,
+        0.7250000000000001,
+        0.775,
+        0.8250000000000001,
+        0.875,
+        0.925,
+        0.9750000000000001
+      ],
+      "counts": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        2,
+        17,
+        35,
+        45,
+        1
+      ],
+      "frequencies": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.02,
+        0.17,
+        0.35,
+        0.45,
+        0.01
+      ],
+      "bin_width": 0.05
+    },
+    "distribution_properties": {
+      "is_normal_approximate": true,
+      "is_symmetric_approximate": false,
+      "has_outliers": true,
+      "peak_location": 0.925,
+      "concentration_coefficient": 0.93
+    }
+  },
+  "tranches_analysis": {
+    "num_tranches": 5,
+    "total_samples": 100,
+    "distance_range": {
+      "min_distance": 0.04965239763259888,
+      "max_distance": 0.24653327465057373,
+      "range_width": 0.19688087701797485
+    },
+    "tranches": [
+      {
+        "tranche_id": 1,
+        "distance_range": {
+          "lower_bound": 0.04965239763259888,
+          "upper_bound": 0.08902857303619385
+        },
+        "similarity_range": {
+          "lower_bound": 0.9109714269638062,
+          "upper_bound": 0.9503476023674011
+        },
+        "count": 37,
+        "percentage": 37.0,
+        "description": "Very High Similarity (Excellent summaries)"
+      },
+      {
+        "tranche_id": 2,
+        "distance_range": {
+          "lower_bound": 0.08902857303619385,
+          "upper_bound": 0.12840474843978883
+        },
+        "similarity_range": {
+          "lower_bound": 0.8715952515602112,
+          "upper_bound": 0.9109714269638062
+        },
+        "count": 33,
+        "percentage": 33.0,
+        "description": "High Similarity (Good summaries)"
+      },
+      {
+        "tranche_id": 3,
+        "distance_range": {
+          "lower_bound": 0.12840474843978883,
+          "upper_bound": 0.16778092384338378
+        },
+        "similarity_range": {
+          "lower_bound": 0.8322190761566162,
+          "upper_bound": 0.8715952515602112
+        },
+        "count": 20,
+        "percentage": 20.0,
+        "description": "Medium Similarity (Acceptable summaries)"
+      },
+      {
+        "tranche_id": 4,
+        "distance_range": {
+          "lower_bound": 0.16778092384338378,
+          "upper_bound": 0.20715709924697875
+        },
+        "similarity_range": {
+          "lower_bound": 0.7928429007530212,
+          "upper_bound": 0.8322190761566162
+        },
+        "count": 9,
+        "percentage": 9.0,
+        "description": "Low Similarity (Poor summaries)"
+      },
+      {
+        "tranche_id": 5,
+        "distance_range": {
+          "lower_bound": 0.20715709924697875,
+          "upper_bound": 0.24653327465057373
+        },
+        "similarity_range": {
+          "lower_bound": 0.7534667253494263,
+          "upper_bound": 0.7928429007530212
+        },
+        "count": 1,
+        "percentage": 1.0,
+        "description": "Very Low Similarity (Very poor summaries)"
+      }
+    ],
+    "summary": {
+      "most_populated_tranche": 1,
+      "least_populated_tranche": 5,
+      "concentration_metric": 1.85
+    }
+  }
+}

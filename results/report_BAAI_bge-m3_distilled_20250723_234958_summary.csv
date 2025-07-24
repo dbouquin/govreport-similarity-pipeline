@@ -1,0 +1,26 @@
+Category,Metric,Value
+Descriptive Statistics,count,100.0
+Descriptive Statistics,mean,0.890146678686142
+Descriptive Statistics,median,0.8951860070228577
+Descriptive Statistics,standard_deviation,0.03954881447897131
+Descriptive Statistics,variance,0.0015641087266920909
+Descriptive Statistics,minimum,0.7534667253494263
+Descriptive Statistics,maximum,0.9503476023674011
+Descriptive Statistics,range,0.19688087701797485
+Descriptive Statistics,skewness,-0.741804686331145
+Descriptive Statistics,kurtosis,0.22139716521745134
+Percentiles,5th_percentile,0.8215997278690338
+Percentiles,10th_percentile,0.8332657516002655
+Percentiles,25th_percentile,0.8641918301582336
+Percentiles,50th_percentile,0.8951860070228577
+Percentiles,75th_percentile,0.9214906096458435
+Percentiles,90th_percentile,0.9354234457015992
+Percentiles,95th_percentile,0.9421292126178742
+Threshold Analysis,very_high_similarity_count,46.0
+Threshold Analysis,very_high_similarity_percentage,46.0
+Threshold Analysis,high_similarity_count,98.0
+Threshold Analysis,high_similarity_percentage,98.0
+Threshold Analysis,medium_similarity_count,100.0
+Threshold Analysis,medium_similarity_percentage,100.0
+Threshold Analysis,low_similarity_count,100.0
+Threshold Analysis,low_similarity_percentage,100.0

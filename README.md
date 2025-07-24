@@ -19,12 +19,12 @@ Dataset on Hugging Face:
 ```bash
 pip install -r requirements.txt
 ```
-*Note- I had some dependency nightmares as I had an older version of pyarrow on my personal machine that didn't want to work with model2vec, so if for some reason `pip` doesn't work for you, `conda` worked for me:*
+*Note - I had an older version of `pyarrow` on my machine that didn't want to work with `datasets`, so if for some reason `pip` doesn't work for you, `conda` worked for me:*
 
 ```bash
 conda create -n govreport-similarity python=3.10 numpy=1.26.4 -y
 conda activate govreport-similarity
-# Install packages in this specific order
+# Install packages in this order
 conda install pytorch torchvision torchaudio -c pytorch
 conda install pyarrow pandas scikit-learn -c conda-forge
 pip install transformers datasets model2vec click rich tqdm
@@ -50,14 +50,15 @@ Replace with the path to your model
 ```bash
 python main.py analyze --model /models/BAAI_bge-m3_distilled --num-samples 100
 ```
-**Example output:**
+**Example:**
 ```bash
+dbouquin$ python main.py analyze --model /Users/dbouquin/Documents/govreport-similarity-pipeline/models/BAAI_bge-m3_distilled --num-samples 100
+
 Analyzing Semantic Similarity
 Model: /Users/dbouquin/Documents/govreport-similarity-pipeline/models/BAAI_bge-m3_distilled
 Dataset: ccdv/govreport-summarization (test)
-Output: /Users/dbouquin/Documents/govreport-similarity-pipeline/results/analysis_BAAI_bge-m3_distilled_20250723_154541
+Output: /Users/dbouquin/Documents/govreport-similarity-pipeline/results/analysis_BAAI_bge-m3_distilled_20250723_234958
 Max samples: 100
-Batch size: 32
 
 Validating model...
 ✓ Model loaded successfully
@@ -65,10 +66,11 @@ Validating model...
   Embedding dimension: 256
 
 Dataset Information:
-  Available splits: []
+  Dataset: ccdv/govreport-summarization
   Required columns present: True
 
 Starting similarity analysis...
+Using Model2Vec's optimized internal batching
 
 Analysis Results:
         Similarity Analysis Summary         
@@ -115,21 +117,27 @@ Analysis Summary:
   • Top 2 tranches contain: 70.0% of samples
 
 ✓ Analysis completed successfully!
-Results saved to: /Users/dbouquin/Documents/govreport-similarity-pipeline/results/analysis_BAAI_bge-m3_distilled_20250723_154541
+Results saved to: /Users/dbouquin/Documents/govreport-similarity-pipeline/results/analysis_BAAI_bge-m3_distilled_20250723_234958
 Samples processed: 100
 Samples failed: 0
 Mean similarity: 0.890
+
+Next: python main.py report --input 
+/Users/dbouquin/Documents/govreport-similarity-pipeline/results/analysis_BAAI_bge-m3_distilled_20250723_234958.csv
 ```
 
-1. **Generate a report**
+3. **Generate a report**
+Replace with the path to your model
 ```bash
 python main.py report --input /results/analysis_*.csv
 ```
-**Example output:**
+**Example:**
 ```bash
+dbouquin$ python main.py report --input /Users/dbouquin/Documents/govreport-similarity-pipeline/results/analysis_BAAI_bge-m3_distilled_20250723_234958.csv
+
 Generating Statistical Report
-Input: /Users/dbouquin/Documents/govreport-similarity-pipeline/results/analysis_BAAI_bge-m3_distilled_20250723_154950.csv
-Output: /Users/dbouquin/Documents/govreport-similarity-pipeline/results/report_BAAI_bge-m3_distilled_20250723_154950
+Input: /Users/dbouquin/Documents/govreport-similarity-pipeline/results/analysis_BAAI_bge-m3_distilled_20250723_234958.csv
+Output: /Users/dbouquin/Documents/govreport-similarity-pipeline/results/report_BAAI_bge-m3_distilled_20250723_234958
 Format: both
 
 Validating input file...
@@ -177,18 +185,18 @@ Most populated tranche: #1
 Total samples: 100
 
 ✓ Report generation completed successfully!
-Report files saved to: /Users/dbouquin/Documents/govreport-similarity-pipeline/results/report_BAAI_bge-m3_distilled_20250723_154950
+Report files saved to: /Users/dbouquin/Documents/govreport-similarity-pipeline/results/report_BAAI_bge-m3_distilled_20250723_234958
 
 Generated Files:
-  ✓ Statistical report (JSON): /Users/dbouquin/Documents/govreport-similarity-pipeline/results/report_BAAI_bge-m3_distilled_20250723_154950.json 
-(0.01 MB)
+  ✓ Statistical report (JSON): 
+/Users/dbouquin/Documents/govreport-similarity-pipeline/results/report_BAAI_bge-m3_distilled_20250723_234958.json (0.01 MB)
   ✓ Summary statistics (CSV): 
-/Users/dbouquin/Documents/govreport-similarity-pipeline/results/report_BAAI_bge-m3_distilled_20250723_154950_summary.csv (0.00 MB)
+/Users/dbouquin/Documents/govreport-similarity-pipeline/results/report_BAAI_bge-m3_distilled_20250723_234958_summary.csv (0.00 MB)
 ```
 
 ## More to Try
 
-1. **Analyze with Custom Output and Batch Size**
+4. **Analyze with Custom Output and Batch Size**
 ```bash
 python main.py analyze \
   --model models/BAAI_bge-m3_distilled \
@@ -267,70 +275,153 @@ Samples failed: 0
 Mean similarity: 0.892
 ```
 
-## CLI Interface
-
-## Available Commands & Flags
+## CLI Commands & Options
 
 ### `distill` Command
+Create distilled models using Model2Vec from transformer models.
+
 ```bash
-python main.py distill \
-    --model BAAI/bge-m3 \
-    --output models/my_model \
-    --pca-dims 256
+python main.py distill [OPTIONS]
 ```
-**Flags:**
-- `--model` / `-m` - Source model to distill (required)
-- `--output` / `-o` - Output directory for distilled model
-- `--pca-dims` - PCA dimensions for reduction
+
+**Options:**
+- `--model` / `-m` - Source model to distill (default: BAAI/bge-m3)
+- `--output` / `-o` - Output directory for distilled model (default: auto-generated)
+- `--pca-dims` - PCA dimensions for reduction (default: 256)
+- `--device` - Device to use: cpu, cuda, mps, auto (default: auto)
+- `--custom-vocab` - Path to custom vocabulary file (one token per line)
+- `--vocab-from-dataset` - Create vocabulary from the target dataset
+- `--vocab-size` - Maximum vocabulary size when creating from dataset (default: 10000)
+- `--force` - Overwrite existing distilled model
+- `--validate` - Validate distilled model after creation
+
+**Examples:**
+```bash
+# Basic distillation with default settings
+python main.py distill
+
+# Distill with custom PCA dimensions
+python main.py distill --model BAAI/bge-m3 --pca-dims 512
+
+# Create vocabulary from target dataset
+python main.py distill --vocab-from-dataset --vocab-size 15000
+
+# Distill different model with validation
+python main.py distill --model sentence-transformers/all-mpnet-base-v2 --validate
+```
 
 ### `analyze` Command  
+Calculate similarity between reports and summaries using distilled models.
+
 ```bash
-python main.py analyze \
-    --model models/my_model \
-    --output results/my_experiment \
-    --num-samples 1000 \
-    --batch-size 64
+python main.py analyze [OPTIONS]
 ```
-**Flags:**
-- `--model` / `-m` - Path to distilled model (required)
-- `--output` / `-o` - Output path for results (auto-generated if not specified)
-- `--dataset` - Dataset to analyze (default: "ccdv/govreport-summarization")
-- `--split` - Dataset split to use (default: "test")
-- `--num-samples` / `-n` - Max samples to analyze (default: all) **[STRETCH GOAL]**
-- `--batch-size` / `-b` - Batch size for processing (default: 32)
+
+**Options:**
+- `--model` / `-m` - Path to distilled model directory (required)
+- `--output` / `-o` - Output path for results (default: auto-generated with timestamp)
+- `--dataset` - Dataset to analyze (default: ccdv/govreport-summarization)
+- `--split` - Dataset split to use (default: test)
+- `--num-samples` / `-n` - Maximum number of samples to analyze (default: all)
+
+**Examples:**
+```bash
+# Basic analysis using all available data
+python main.py analyze --model models/BAAI_bge-m3_distilled
+
+# Test with a small sample first
+python main.py analyze --model models/my_model --num-samples 100
+
+# Analyze with custom output location
+python main.py analyze \
+  --model models/BAAI_bge-m3_distilled \
+  --output results/my_experiment \
+  --num-samples 1000
+
+# Use different dataset split
+python main.py analyze \
+  --model models/my_model \
+  --dataset ccdv/govreport-summarization \
+  --split train \
+  --num-samples 500
+```
 
 ### `report` Command
+Generate statistical reports from analysis results.
+
 ```bash
-python main.py report \
-    --input results/analysis_model_20250719_143022.json \
-    --output reports/quality_report \
-    --format text
+python main.py report [OPTIONS]
 ```
-**Flags:**
-- `--input` / `-i` - Path to analysis results file (required)
-- `--output` / `-o` - Output path for report (auto-generated if not specified)
-- `--format` - Output format: json, text, csv, all (default: all)
 
-## Working Stretch Goal
+**Options:**
+- `--input` / `-i` - Path to analysis results file (JSON or CSV) (required)
+- `--output` / `-o` - Output path for report files (default: auto-generated)
+- `--format` - Output format: json, csv, both (default: both)
 
-1. **Sub-sampling**: `--num-samples` parameter allows analyzing dataset portions
+**Examples:**
+```bash
+# Generate report from analysis results
+python main.py report --input results/analysis_model_20250123_143022.csv
 
+# Specify output location and format
+python main.py report \
+  --input results/analysis_my_model.json \
+  --output reports/quality_assessment \
+  --format both
+
+# Generate only CSV summary
+python main.py report \
+  --input results/analysis_*.csv \
+  --format csv
+```
+
+### Utility Commands
+
+#### `validate` - Check Environment
+```bash
+python main.py validate [OPTIONS]
+```
+- `--check-env` - Run comprehensive environment checks
+
+#### `info` - Pipeline Information
+```bash
+python main.py info
+```
+Shows configuration, directory status, and usage examples.
+
+## Advanced Usage
+
+### Custom Vocabulary
+```bash
+# Create domain-specific model with custom vocabulary
+python main.py distill \
+  --model BAAI/bge-m3 \
+  --vocab-from-dataset \
+  --vocab-size 15000 \
+  --output models/domain_specific
+```
+
+## Working Features
+
+### **Core Assignment Requirements**
+- **`distill` command**: Creates distilled models with Model2Vec from BAAI/bge-m3
+- **`analyze` command**: Calculates similarities, saves results with metadata and tranches analysis
+- **`report` command**: Generates statistics and quality metrics with distance distribution
+### **Stretch Goal Implemented**
+- **Sub-sampling**: `--num-samples` parameter allows analyzing dataset portions
+
+### **Professional Features**
+- **Metadata preservation**: Analysis metadata flows through to reports
+- **File organization**: Consistent naming with timestamps for easy tracking
+- **Error handling**: Robust error messages and validation
+- **Progress tracking**: Real-time feedback during long operations
+- 
 ## File Naming Convention
 
 - Analysis output: `analysis_modelname_20250719_143022.json` + `.csv`
 - Report output: `report_modelname_20250719_143022.json` + `.txt` + `_summary.csv`
 
 Where timestamp is e.g., `report_modelname_yyymmdd_hhmmss.json` + `.txt` + `_summary.csv`
-
-## Core Assignment Completion
-
-- `distill` command - Creates distilled models with Model2Vec  
-- `analyze` command - Calculates similarities, saves results with metadata  
-- `report` command - Generates statistics and quality metrics  
-- Sub-sampling stretch goal - `--num-samples` parameter  
-- Clean, professional interface  
-- Metadata preservation - Analysis metadata flows to reports  
-- Proper file organization - Consistent naming for easy tracking
 
 ## Architecture
 
@@ -357,58 +448,121 @@ govreport_similarity/
 └── README.md                    # This file
 ```
 
-## Key Features
-
-### Memory-Efficient Processing
+## Optimizations
 - **Streaming Datasets**: Process large government report datasets without loading into memory
-- **Batch Processing**: Configurable batch sizes for optimal memory/speed tradeoffs
+- **Model2Vec Optimization**: Leverages Model2Vec's internal batching for optimal performance
 - **Smart Caching**: Intelligent data loading with validation and cleaning
-
-### Professional Model2Vec Integration
-- **Parameter Safety**: Addresses Model2Vec "unexpected behaviors" with explicit parameter handling
 - **Robust Distillation**: Comprehensive error handling and validation
 - **Model Metrics**: Detailed model information and size optimization
 
-### Advanced Analysis Capabilities
-- **Parallel Processing**: Optional multiprocessing for large-scale analysis
-- **Outlier Detection**: Statistical analysis of quality patterns
-- **Distribution Analysis**: Comprehensive similarity score analysis
-- **Content Length Analysis**: Correlation between length and quality
-
-### Comprehensive Reporting
-- **Executive Summary**: High-level quality assessment with ratings
-- **Statistical Analysis**: Detailed descriptive statistics and distributions
-- **Quality Assessment**: Categorized quality metrics with thresholds
-- **Actionable Recommendations**: Specific improvement suggestions
-
 ## Output Formats
-
-### Analysis Results (CSV)
-```csv
-sample_id,similarity_score,report_length,summary_length,processing_time
-doc_001,0.847,1247,156,0.023
-doc_002,0.739,2103,203,0.031
-```
 
 ### Analysis Results (JSON)
 ```json
 {
   "analysis_metadata": {
-    "model_path": "models/BAAI_bge-m3_distilled",
+    "model_path": "/Users/dbouquin/Documents/govreport-similarity-pipeline/models/BAAI_bge-m3_distilled",
     "dataset_name": "ccdv/govreport-summarization",
-    "analysis_timestamp": "2025-01-19T15:30:00",
-    "similarity_metric": "cosine"
+    "analysis_timestamp": "2025-07-23T23:50:06.426517",
+    "num_samples_requested": 100,
+    "similarity_metric": "cosine",
+    "processing_mode": "single_worker"
   },
-  "similarity_scores": [0.847, 0.739, ...],
-  "processing_stats": {
-    "samples_processed": 1000,
-    "samples_failed": 13,
-    "average_processing_time": 0.025
-  }
-}
+  "similarity_scores": [
+    0.9503476023674011,
+    0.8494939208030701,
+    0.9366579055786133,
+    0.9317487478256226,
+    0.7534667253494263,
+    0.8712045550346375,
+    ...
+```
+
+### Analysis Results (CSV)
+```csv
+similarity_score,sample_id,report_length,summary_length,processing_time
+0.9503476023674011,972118,15281,3737,0.0012785506248474121
+0.8494939208030701,899072,34791,4779,0.0012785506248474121
+0.9366579055786133,62990,49978,3203,0.0012785506248474121
+...
 ```
 
 ### Report Output
-- **JSON**: Complete machine-readable report with all metrics
-- **Text**: Human-readable summary with key findings
-- **CSV**: Summary statistics for spreadsheet analysis
+
+- **Report (JSON)**
+```json
+{
+  "report_metadata": {
+    "input_path": "/Users/dbouquin/Documents/govreport-similarity-pipeline/results/analysis_BAAI_bge-m3_distilled_20250723_234958.csv",
+    "report_timestamp": "2025-07-23T23:52:36.828534",
+    "analysis_metadata": {
+      "model_path": "/Users/dbouquin/Documents/govreport-similarity-pipeline/models/BAAI_bge-m3_distilled",
+      "dataset_name": "ccdv/govreport-summarization",
+      "analysis_timestamp": "2025-07-23T23:50:06.426517",
+      "num_samples_requested": 100,
+      "similarity_metric": "cosine",
+      "processing_mode": "single_worker"
+    },
+    "generator": "Government Report Similarity Pipeline"
+  },
+  "statistical_analysis": {
+    "descriptive_statistics": {
+      "count": 100,
+      "mean": 0.890146678686142,
+      "median": 0.8951860070228577,
+      "standard_deviation": 0.03954881447897131,
+      "variance": 0.0015641087266920909,
+      "minimum": 0.7534667253494263,
+      "maximum": 0.9503476023674011,
+      "range": 0.19688087701797485,
+      "skewness": -0.741804686331145,
+      "kurtosis": 0.22139716521745134
+    },
+    "percentiles": {
+      "5th": 0.8215997278690338,
+      "10th": 0.8332657516002655,
+      "25th": 0.8641918301582336,
+      "50th": 0.8951860070228577,
+      "75th": 0.9214906096458435,
+      "90th": 0.9354234457015992,
+      "95th": 0.9421292126178742
+    },
+    "confidence_intervals": {
+      "95_percent_lower": 0.8822598024126641,
+      "95_percent_upper": 0.8980335549596198,
+      "99_percent_lower": 0.8797072280656788,
+      "99_percent_upper": 0.9005861293066051
+    },
+    ...
+```
+ 
+- **Report (CSV)**
+```csv
+Category,Metric,Value
+Descriptive Statistics,count,100.0
+Descriptive Statistics,mean,0.890146678686142
+Descriptive Statistics,median,0.8951860070228577
+Descriptive Statistics,standard_deviation,0.03954881447897131
+Descriptive Statistics,variance,0.0015641087266920909
+Descriptive Statistics,minimum,0.7534667253494263
+Descriptive Statistics,maximum,0.9503476023674011
+Descriptive Statistics,range,0.19688087701797485
+Descriptive Statistics,skewness,-0.741804686331145
+Descriptive Statistics,kurtosis,0.22139716521745134
+Percentiles,5th_percentile,0.8215997278690338
+Percentiles,10th_percentile,0.8332657516002655
+Percentiles,25th_percentile,0.8641918301582336
+Percentiles,50th_percentile,0.8951860070228577
+Percentiles,75th_percentile,0.9214906096458435
+Percentiles,90th_percentile,0.9354234457015992
+Percentiles,95th_percentile,0.9421292126178742
+Threshold Analysis,very_high_similarity_count,46.0
+Threshold Analysis,very_high_similarity_percentage,46.0
+Threshold Analysis,high_similarity_count,98.0
+Threshold Analysis,high_similarity_percentage,98.0
+Threshold Analysis,medium_similarity_count,100.0
+Threshold Analysis,medium_similarity_percentage,100.0
+Threshold Analysis,low_similarity_count,100.0
+Threshold Analysis,low_similarity_percentage,100.0
+```
+

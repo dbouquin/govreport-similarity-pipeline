@@ -46,6 +46,7 @@ python main.py distill --model BAAI/bge-m3 --pca-dims 256
 ```
 
 2. **Test on a sample**
+
 Replace with the path to your model
 ```bash
 python main.py analyze --model /models/BAAI_bge-m3_distilled --num-samples 100
@@ -127,6 +128,7 @@ Next: python main.py report --input
 ```
 
 3. **Generate a report**
+
 Replace with the path to your model
 ```bash
 python main.py report --input /results/analysis_*.csv
@@ -192,87 +194,6 @@ Generated Files:
 /Users/dbouquin/Documents/govreport-similarity-pipeline/results/report_BAAI_bge-m3_distilled_20250723_234958.json (0.01 MB)
   ✓ Summary statistics (CSV): 
 /Users/dbouquin/Documents/govreport-similarity-pipeline/results/report_BAAI_bge-m3_distilled_20250723_234958_summary.csv (0.00 MB)
-```
-
-## More to Try
-
-4. **Analyze with Custom Output and Batch Size**
-```bash
-python main.py analyze \
-  --model models/BAAI_bge-m3_distilled \
-  --output results/test_custom \
-  --num-samples 25 \
-  --batch-size 16
-```
-**Example Output**
-```bash
-Analyzing Semantic Similarity
-Model: models/BAAI_bge-m3_distilled
-Dataset: ccdv/govreport-summarization (test)
-Output: results/test_custom
-Max samples: 25
-Batch size: 16
-
-Validating model...
-✓ Model loaded successfully
-  Vocabulary size: 249,999
-  Embedding dimension: 256
-
-Dataset Information:
-  Available splits: []
-  Required columns present: True
-
-Starting similarity analysis...
-
-Analysis Results:
-        Similarity Analysis Summary         
-┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━┓
-┃ Metric                      ┃ Value      ┃
-┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━┩
-│ Samples Processed           │ 25         │
-│ Samples Failed              │ 0          │
-│ Success Rate                │ 100.0%     │
-├─────────────────────────────┼────────────┤
-│ Mean Similarity             │ 0.892      │
-│ Median Similarity           │ 0.906      │
-│ Min Similarity              │ 0.753      │
-│ Max Similarity              │ 0.950      │
-├─────────────────────────────┼────────────┤
-│ High Similarity (>0.8)      │ 24 (96.0%) │
-│ Medium Similarity (0.5-0.8) │ 1 (4.0%)   │
-│ Low Similarity (≤0.5)       │ 0 (0.0%)   │
-└─────────────────────────────┴────────────┘
-
-Distance Distribution in Tranches:
-                                          Distance Distribution Tranches                                           
-┏━━━━━━━━━━━┳━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━┳━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-┃ Tranche # ┃ Distance Range ┃ Similarity Range ┃ Count ┃ Percentage ┃ Quality Level                              ┃
-┡━━━━━━━━━━━╇━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━╇━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
-│     1     │ 0.050 - 0.089  │ 0.911 - 0.950    │    12 │      48.0% │ Very High Similarity (Excellent summaries) │
-│     2     │ 0.089 - 0.128  │ 0.872 - 0.911    │     4 │      16.0% │ High Similarity (Good summaries)           │
-│     3     │ 0.128 - 0.168  │ 0.832 - 0.872    │     5 │      20.0% │ Medium Similarity (Acceptable summaries)   │
-│     4     │ 0.168 - 0.207  │ 0.793 - 0.832    │     3 │      12.0% │ Low Similarity (Poor summaries)            │
-│     5     │ 0.207 - 0.247  │ 0.753 - 0.793    │     1 │       4.0% │ Very Low Similarity (Very poor summaries)  │
-└───────────┴────────────────┴──────────────────┴───────┴────────────┴────────────────────────────────────────────┘
-
-Tranches Summary:
-  Total tranches: 5
-  Total samples: 25
-  Distance range: 0.050 - 0.247
-  Most populated tranche: #1
-  Least populated tranche: #5
-  Concentration metric: 2.40 (1.0 = uniform distribution)
-
-Analysis Summary:
-  • High-quality samples (>0.8 similarity): 24/25 (96.0%)
-  • Standard deviation: 0.050 (consistency indicator)
-  • Top 2 tranches contain: 64.0% of samples
-
-✓ Analysis completed successfully!
-Results saved to: results/test_custom
-Samples processed: 25
-Samples failed: 0
-Mean similarity: 0.892
 ```
 
 ## CLI Commands & Options
@@ -457,7 +378,7 @@ govreport_similarity/
 
 ## Output Formats
 
-### Analysis Results (JSON)
+### [Analysis Results (JSON)](https://github.com/dbouquin/govreport-similarity-pipeline/blob/main/results/analysis_BAAI_bge-m3_distilled_20250723_234958.json)
 ```json
 {
   "analysis_metadata": {
@@ -478,7 +399,7 @@ govreport_similarity/
     ...
 ```
 
-### Analysis Results (CSV)
+### [Analysis Results (CSV)](https://github.com/dbouquin/govreport-similarity-pipeline/blob/main/results/analysis_BAAI_bge-m3_distilled_20250723_234958.csv)
 ```csv
 similarity_score,sample_id,report_length,summary_length,processing_time
 0.9503476023674011,972118,15281,3737,0.0012785506248474121
@@ -487,9 +408,7 @@ similarity_score,sample_id,report_length,summary_length,processing_time
 ...
 ```
 
-### Report Output
-
-- **Report (JSON)**
+### [Report (JSON)](https://github.com/dbouquin/govreport-similarity-pipeline/blob/main/results/report_BAAI_bge-m3_distilled_20250723_234958.json)
 ```json
 {
   "report_metadata": {
@@ -536,7 +455,7 @@ similarity_score,sample_id,report_length,summary_length,processing_time
     ...
 ```
  
-- **Report (CSV)**
+### [Report (CSV)](https://github.com/dbouquin/govreport-similarity-pipeline/blob/main/results/report_BAAI_bge-m3_distilled_20250723_234958_summary.csv)
 ```csv
 Category,Metric,Value
 Descriptive Statistics,count,100.0

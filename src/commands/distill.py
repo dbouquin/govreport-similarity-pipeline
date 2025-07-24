@@ -258,7 +258,7 @@ def validate_distilled_model(
         logger.info("Model validation completed successfully")
         
     except Exception as e:
-        console.print(f" ✗ Model validation failed: {e}")
+        console.print(f" Model validation failed: {e}")
         logger.error(f"Model validation failed: {e}")
         raise
 

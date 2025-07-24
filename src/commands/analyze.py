@@ -1,6 +1,6 @@
 """
 CLI command for similarity analysis between reports and summaries.
-Updated with tranches analysis display and cleaned of subjective interpretations.
+Updated to work with simplified Model2Vec batching approach.
 """
 
 from pathlib import Path
@@ -46,13 +46,6 @@ logger = get_logger("analyze_command")
     type=int,
     help="Maximum number of samples to analyze (default: all)"
 )
-@click.option(
-    "--batch-size", "-b",
-    type=int,
-    default=32,
-    help="Batch size for processing (default: 32)"
-)
-
 @click.pass_context
 def analyze_command(
     ctx: click.Context,
@@ -60,8 +53,7 @@ def analyze_command(
     output: Optional[Path],
     dataset: str,
     split: str,
-    num_samples: Optional[int],
-    batch_size: int
+    num_samples: Optional[int]
 ) -> None:
     """
     Analyze semantic similarity between reports and summaries.
@@ -70,14 +62,12 @@ def analyze_command(
     between government reports and their AI-generated summaries, providing insights
     into summarization quality including distance distribution in tranches.
     
+    The updated implementation trusts Model2Vec's internal batching for optimal
+    performance and memory efficiency.
     """
     config: Config = ctx.obj["config"]
     
-    # Override config with command-line arguments
-    if batch_size != 32:
-        config.batch_size = batch_size
-    
-    # Determine output path with better naming convention
+    # Determine output path with timestamp
     if output is None:
         timestamp = __import__('datetime').datetime.now().strftime("%Y%m%d_%H%M%S")
         model_name = model.name
@@ -88,7 +78,6 @@ def analyze_command(
     console.print(f"Dataset: {dataset} ({split})")
     console.print(f"Output: {output}")
     console.print(f"Max samples: {num_samples or 'all'}")
-    console.print(f"Batch size: {batch_size}")
     
     try:
         # Initialize components
@@ -113,7 +102,7 @@ def analyze_command(
         console.print("\n[bold]Dataset Information:[/bold]")
         try:
             dataset_info = data_loader.get_dataset_info(dataset)
-            console.print(f"  Available splits: {list(dataset_info['splits'].get('default', []))}")
+            console.print(f"  Dataset: {dataset_info['dataset_name']}")
             console.print(f"  Required columns present: {dataset_info.get('has_required_columns', 'Unknown')}")
                 
         except Exception as e:
@@ -121,23 +110,23 @@ def analyze_command(
         
         # Perform analysis
         console.print(f"\n[bold green]Starting similarity analysis...[/bold green]")
+        console.print("[dim]Using Model2Vec's optimized internal batching[/dim]")
         
         results = analyzer.analyze_dataset(
             model_path=model,
             output_path=output,
             num_samples=num_samples,
-            dataset_name=dataset,
-            max_workers=1  # Always single-worker - couldn't get multiprocessing to work in the timeframe
+            dataset_name=dataset
         )
         
         # Display results summary
         display_analysis_results(results, console)
         
-        # Display tranches analysis (NEW - addressing assignment requirement)  
+        # Display tranches analysis
         if results.get("distance_tranches") and "error" not in results["distance_tranches"]:
             display_tranches_analysis(results["distance_tranches"], console)
         
-        # Show objective analysis summary
+        # Show analysis summary
         show_analysis_summary(results, console)
         
         # Generate summary report
@@ -151,7 +140,7 @@ def analyze_command(
             console.print(f"Mean similarity: {mean_similarity:.3f}")
         
         # Provide next steps
-        console.print(f"\nUse: [code]python main.py report --input {output}.csv[/code] to generate detailed statistics")
+        console.print(f"\n[dim]Next: [code]python main.py report --input {output}.csv[/code][/dim]")
         
     except Exception as e:
         console.print(f"\n[red]✗ Analysis failed: {e}[/red]")
@@ -212,7 +201,6 @@ def display_analysis_results(results: dict, console: Console) -> None:
 def display_tranches_analysis(tranches_data: dict, console: Console) -> None:
     """
     Display distance tranches analysis in a formatted table.
-    This addresses the assignment requirement for "Distance distribution (in tranches)".
     
     Args:
         tranches_data: Tranches analysis results
@@ -273,7 +261,6 @@ def display_tranches_analysis(tranches_data: dict, console: Console) -> None:
 def show_analysis_summary(results: dict, console: Console) -> None:
     """
     Show objective analysis summary for Harvard IDI context.
-    Focuses on objective metrics without subjective interpretations.
     
     Args:
         results: Analysis results
@@ -291,7 +278,7 @@ def show_analysis_summary(results: dict, console: Console) -> None:
         high_quality_pct = (high_quality_count / len(scores)) * 100
         summary_metrics.append(f"High-quality samples (>0.8 similarity): {high_quality_count}/{len(scores)} ({high_quality_pct:.1f}%)")
         
-        # Consistency assessment - let the numbers speak
+        # Consistency assessment
         import numpy as np
         std_sim = np.std(scores)
         summary_metrics.append(f"Standard deviation: {std_sim:.3f} (consistency indicator)")
@@ -311,48 +298,3 @@ def show_analysis_summary(results: dict, console: Console) -> None:
         
     except Exception as e:
         console.print(f"[yellow]Could not generate summary metrics: {e}[/yellow]")
-
-
-def validate_analysis_requirements(results: dict) -> None:
-    """
-    Validate that analysis results meet assignment requirements.
-    
-    Args:
-        results: Analysis results to validate
-        
-    Raises:
-        click.ClickException: If requirements are not met
-    """
-    try:
-        # Check for similarity scores
-        if not results.get("similarity_scores"):
-            raise click.ClickException("No similarity scores generated")
-        
-        # Check for processing stats
-        if not results.get("processing_stats"):
-            raise click.ClickException("Missing processing statistics")
-        
-        # Check for tranches analysis (assignment requirement)
-        if not results.get("distance_tranches"):
-            raise click.ClickException("Missing distance tranches analysis")
-        
-        tranches = results["distance_tranches"]
-        if "error" in tranches:
-            raise click.ClickException(f"Tranches analysis failed: {tranches['error']}")
-        
-        # Validate tranches structure
-        required_tranche_fields = ["num_tranches", "total_samples", "tranches", "summary"]
-        for field in required_tranche_fields:
-            if field not in tranches:
-                raise click.ClickException(f"Missing required tranches field: {field}")
-        
-        # Check that we have actual tranche data
-        if not tranches["tranches"]:
-            raise click.ClickException("No tranche data generated")
-        
-        console.print("[green]✓ All assignment requirements validated successfully[/green]")
-        
-    except click.ClickException:
-        raise
-    except Exception as e:
-        raise click.ClickException(f"Validation failed: {e}")

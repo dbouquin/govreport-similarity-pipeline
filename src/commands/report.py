@@ -202,31 +202,45 @@ def display_statistical_summary(stats: dict, console: Console) -> None:
 
 
 def display_quality_metrics(quality_metrics: dict, console: Console) -> None:
-    """Display quality metrics section."""
+    """Display quality metrics section - SIMPLIFIED."""
     try:
-        threshold_analysis = quality_metrics.get("threshold_analysis", {})
+        # Skip the confusing cumulative threshold analysis entirely
+        # Just show the clear exclusive range distribution
         
-        if threshold_analysis:
-            table = Table(title="Threshold Analysis", show_header=True, header_style="bold magenta")
-            table.add_column("Similarity Level", style="cyan")
-            table.add_column("Threshold", justify="center")
+        sample_distribution = quality_metrics.get("sample_distribution", {})
+        if sample_distribution and "error" not in sample_distribution:
+            table = Table(title="Similarity Distribution", show_header=True, header_style="bold magenta")
+            table.add_column("Quality Level", style="cyan")
+            table.add_column("Range", style="yellow")
             table.add_column("Count", justify="right")
             table.add_column("Percentage", justify="right")
             
-            for metric_name, data in threshold_analysis.items():
-                level = metric_name.replace("_similarity", "").replace("_", " ").title()
-                threshold = data.get("threshold", 0)
-                count = data.get("count", 0)
-                percentage = data.get("percentage", 0)
-                
-                table.add_row(
-                    level,
-                    f"≥ {threshold}",
-                    f"{count:,}",
-                    f"{percentage:.1f}%"
-                )
+            # Define the order and labels you want
+            levels = [
+                ("very_high", "Very High"),
+                ("high", "High"), 
+                ("medium", "Medium"),
+                ("low", "Low"),
+                ("very_low", "Very Low")
+            ]
+            
+            for level_key, level_label in levels:
+                if level_key in sample_distribution:
+                    data = sample_distribution[level_key]
+                    table.add_row(
+                        level_label,
+                        data.get("range", ""),
+                        f"{data.get('count', 0):,}",
+                        f"{data.get('percentage', 0):.1f}%"
+                    )
             
             console.print(table)
+        
+        # Show processing stats if available
+        processing_stats = quality_metrics.get("processing_stats", {})
+        if processing_stats:
+            console.print(f"\nProcessing: {processing_stats.get('samples_processed', 0):,} samples processed, "
+                         f"{processing_stats.get('samples_failed', 0):,} failed")
         
     except Exception as e:
         console.print(f"[yellow]Could not display quality metrics: {e}[/yellow]")
